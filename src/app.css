@@ -1,111 +1,147 @@
 :root {
-  color-scheme: dark;
+  /* Background Colors */
+  --bg-primary: #0e2954;
+  --bg-secondary: #1a4382;
 
-  /* Dark ink ramp, a night sky behind the flag blue */
-  --page: #0b0d14;
-  --card: #11141c;
-  --raised: #1a1e28;
-  --hairline: rgba(238, 240, 245, 0.08);
-  --text: #eef0f5;
-  --text-2: #a3a9b8;
-  --text-3: #7a8296;
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
 
-  /* Brand blue from the logo, the only accent */
-  --accent: #204cf9;
-  --accent-press: #3a63ff;
-  /* Brand blue lifted for text on dark surfaces (contrast) */
-  --accent-text: #7b97ff;
-  --positive: #4cc38a;
-
-  --sans: "IBM Plex Sans Hebrew", system-ui, sans-serif;
-  /* Plex Mono has no Hebrew; Plex Sans Hebrew takes those glyphs instead of a system Courier */
-  --mono: "IBM Plex Mono", "IBM Plex Sans Hebrew", ui-monospace, monospace;
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-
-  /* Old names, still read by the dashboard and admin pages */
-  --bg-primary: var(--page);
-  --bg-secondary: var(--card);
-  --text-primary: var(--text);
-  --text-secondary: var(--text-2);
-  --accent-color: var(--accent);
-  --accent-hover: var(--accent-press);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+  /* Accent Colors */
+  --accent-color: #204cf9;
+  --accent-hover: #3d66fb;
 }
 
 body {
-  margin: 0;
-  background: var(--page);
-  color: var(--text);
-  font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  @apply bg-[var(--bg-primary)] text-[var(--text-primary)] leading-relaxed m-0 p-0 font-sans;
+  direction: rtl;
 }
 
-a {
+header {
+  @apply flex justify-between items-center bg-[var(--bg-secondary)] shadow-md flex-row-reverse px-5 py-4;
+}
+
+.logo-container {
+  @apply flex items-center justify-end;
+}
+
+.logo {
+  @apply max-h-[50px] brightness-110 contrast-100;
+}
+
+.login-btn {
+  @apply bg-[var(--accent-color)] text-white border-none px-10 py-2.5 rounded-md cursor-pointer mt-2 transition-colors duration-300 ease-in-out;
+}
+
+.login-btn:hover {
+  @apply bg-[var(--accent-hover)];
+}
+
+.login-btn:focus {
+  @apply outline-none ring-2 ring-[var(--accent-color)] ring-offset-2;
+}
+
+.content {
+  @apply max-w-[90%] sm:max-w-[800px] bg-[var(--bg-secondary)] shadow-md text-right mx-auto my-7 p-6 rounded-md;
+}
+
+h1 {
+  @apply text-[var(--text-primary)] border-b-2 border-[var(--accent-color)] pb-2.5;
+}
+
+h1 a {
+  @apply text-[var(--text-primary)] no-underline;
+}
+
+h1 a:hover {
+  @apply text-[var(--accent-hover)];
+}
+
+p {
+  @apply text-[var(--text-secondary)] text-right mb-4;
+}
+
+strong {
+  @apply text-right block;
+}
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: var(--accent-hover);
+}
+
+.logged-in {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.login-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.github-logo {
+  width: 50px;
+  height: 50px;
+}
+.logo-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+.logo-container :visited {
   color: inherit;
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+.logo-container a {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: #f0f0f000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Shared buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 44px;
-  padding: 0 20px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  font: 500 15px/1 var(--sans);
-  text-decoration: none;
-  cursor: pointer;
-  transition:
-    background-color 150ms var(--ease),
-    border-color 150ms var(--ease),
-    transform 150ms var(--ease);
+.logo-container a:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-.btn:active {
-  transform: scale(0.98);
+.logo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
+.logo-container a img[alt="Discord Logo"] {
+  object-fit: contain;
 
-.btn svg {
-  width: 18px;
-  height: 18px;
-  flex: none;
-  fill: currentColor;
+  width: 100%;
+  height: 100%;
 }
-
-.btn-primary {
-  background: var(--accent);
-  color: #fff;
-}
-
-.btn-primary:hover {
-  background: var(--accent-press);
-}
-
-.btn-secondary {
-  background: var(--card);
-  border-color: var(--hairline);
-  color: var(--text);
-}
-
-.btn-secondary:hover {
-  background: var(--raised);
-}
-
-.btn-sm {
-  height: 36px;
-  padding: 0 16px;
-  font-size: 14px;
+.logo-container a img[alt="GitHub Logo"] {
+  background-color: #ffffff;
 }
